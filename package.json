@@ -1,0 +1,118 @@
+{
+  "name": "xagent-desktop",
+  "version": "1.0.0",
+  "description": "XAgent Desktop Client (TypeScript Local Agent)",
+  "main": "./out/main/index.js",
+  "author": "shichao yuan",
+  "license": "MIT",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "package": "electron-vite build && electron-builder --dir",
+    "dist": "electron-vite build && electron-builder"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^1.0.0",
+    "@ai-sdk/openai": "^1.0.11",
+    "@ai-sdk/react": "^1.0.0",
+    "@hono/node-server": "^1.13.7",
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "ai": "^4.0.22",
+    "clsx": "^2.1.1",
+    "drizzle-orm": "^0.38.2",
+    "hono": "^4.6.14",
+    "lucide-react": "^0.468.0",
+    "mammoth": "^1.13.0",
+    "pdf-parse": "^2.4.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-markdown": "^9.0.1",
+    "remark-gfm": "^4.0.1",
+    "sql.js": "^1.12.0",
+    "tailwind-merge": "^2.5.5",
+    "xlsx": "^0.18.5",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.10",
+    "@types/pdf-parse": "^1.1.5",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@types/sql.js": "^1.4.9",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "drizzle-kit": "^0.30.1",
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
+    "electron-vite": "^2.3.0",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.16",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11"
+  },
+  "allowScripts": {
+    "electron@33.2.1": true,
+    "esbuild@0.18.20": true,
+    "esbuild@0.21.5": true,
+    "esbuild@0.19.12": true
+  },
+  "build": {
+    "appId": "com.xagent.desktop",
+    "productName": "XAgent",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "out/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "**/*.wasm",
+      "**/*.node"
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "XAgent-${version}-Setup-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "XAgent",
+      "perMachine": false,
+      "allowElevation": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "installerHeaderIcon": "build/icon.ico",
+      "deleteAppDataOnUninstall": false,
+      "runAfterFinish": true,
+      "menuCategory": false,
+      "language": "2052"
+    },
+    "copyright": "Copyright © 2026 XAgent",
+    "extraResources": [
+      {
+        "from": "build/icon.png",
+        "to": "icon.png"
+      },
+      {
+        "from": "node_modules/sql.js/dist/sql-wasm.wasm",
+        "to": "sql-wasm.wasm"
+      }
+    ],
+    "extraMetadata": {
+      "main": "./out/main/index.js"
+    }
+  }
+}
